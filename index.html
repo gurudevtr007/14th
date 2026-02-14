@@ -9,7 +9,7 @@
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
-  overflow-x:hidden;
+  overflow:hidden;
   text-align:center;
   background: linear-gradient(135deg,#ff9a9e,#fad0c4);
   color:white;
@@ -27,12 +27,12 @@ body{
   100%{transform:translateY(-20vh);}
 }
 
-/* Unlock Screen */
+/* Magical Unlock Screen */
 #unlock{
   position:fixed;
   width:100%;
   height:100vh;
-  background:#ff6b81;
+  background: radial-gradient(circle at center,#ff6b81,#c44569);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -40,14 +40,90 @@ body{
   z-index:999;
 }
 
-#unlock button{
-  padding:15px 30px;
-  border:none;
-  border-radius:40px;
-  font-size:18px;
-  background:white;
-  color:#ff4b6e;
+/* Heart */
+.gift-heart{
+  position:relative;
+  width:200px;
+  height:180px;
   cursor:pointer;
+  animation:floatHeart 3s ease-in-out infinite;
+}
+
+.heart-core{
+  position:absolute;
+  width:200px;
+  height:180px;
+  background:#ff4b6e;
+  transform:rotate(-45deg);
+  top:40px;
+  left:0;
+}
+
+.heart-core:before,
+.heart-core:after{
+  content:"";
+  position:absolute;
+  width:200px;
+  height:180px;
+  background:#ff4b6e;
+  border-radius:50%;
+}
+
+.heart-core:before{
+  top:-100px;
+  left:0;
+}
+
+.heart-core:after{
+  left:100px;
+  top:0;
+}
+
+/* Ribbon */
+.ribbon{
+  position:absolute;
+  background:white;
+  z-index:2;
+  transition:1s ease;
+}
+
+.ribbon.vertical{
+  width:20px;
+  height:260px;
+  left:90px;
+  top:-40px;
+}
+
+.ribbon.horizontal{
+  height:20px;
+  width:260px;
+  top:80px;
+  left:-30px;
+}
+
+.unlock-text{
+  margin-top:40px;
+  font-size:22px;
+}
+
+@keyframes floatHeart{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.gift-heart.glow .heart-core{
+  box-shadow:0 0 60px #fff, 0 0 120px #ff4b6e;
+  transition:1s ease;
+}
+
+.gift-heart.unwrapped .vertical{
+  transform:translateY(-200px);
+  opacity:0;
+}
+
+.gift-heart.unwrapped .horizontal{
+  transform:translateX(200px);
+  opacity:0;
 }
 
 /* Banner */
@@ -59,13 +135,11 @@ body{
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  background:rgba(0,0,0,0.2);
-  backdrop-filter:blur(5px);
 }
 
 .hero img{
   width:100%;
-  height:100%;
+  height:500px;
   object-fit:cover;
   position:absolute;
   top:0;
@@ -73,7 +147,6 @@ body{
   z-index:-1;
 }
 
-/* Sections */
 .section{
   padding:100px 20px;
   display:none;
@@ -83,112 +156,51 @@ body{
   display:block;
 }
 
-/* Images */
-.section img{
-  width:260px;
-  border-radius:25px;
-  margin:20px;
-}
-
-/* Buttons */
 button{
   padding:12px 25px;
   border:none;
   border-radius:40px;
   background:#ff4b6e;
   color:white;
-  font-size:16px;
   cursor:pointer;
   margin-top:20px;
 }
-
-/* Cartoon popup */
-.cartoon{
-  position:fixed;
-  width:100px;
-  animation:pop 5s forwards;
-}
-@keyframes pop{
-  0%{transform:scale(0);}
-  20%{transform:scale(1);}
-  100%{opacity:0;}
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Unlock Screen -->
+<!-- Unlock -->
 <div id="unlock">
-  <h1>This is only for Jojesha ❤️</h1>
-  <button onclick="enterSite()">Unlock My Heart 💖</button>
+  <div class="gift-heart" onclick="unwrapHeart()">
+      <div class="ribbon vertical"></div>
+      <div class="ribbon horizontal"></div>
+      <div class="heart-core"></div>
+  </div>
+  <p class="unlock-text">A little gift for you… 💖</p>
 </div>
 
 <!-- Banner -->
 <div class="hero">
-  <!-- Replace banner.jpg with your banner image -->
   <img src="banner.jpg">
-  <h1>Happy Valentine’s Day Jojesha ❤️</h1>
+  <h1>Happy Valentine’s Day ❤️</h1>
   <button onclick="showStep(1)">Begin Journey</button>
 </div>
 
-<!-- Step 1 -->
+<!-- Step -->
 <div class="section" id="step1">
-  <h2>Our Story Begins 💞</h2>
+  <h2>Our Story 💞</h2>
   <p>The day we met changed everything.</p>
-
-  <!-- GIF space -->
-  <img src="yourgif.gif">
-
-  <button onclick="showStep(2)">Go Deeper</button>
+  <button onclick="showStep(2)">Next</button>
 </div>
 
-<!-- Step 2 -->
 <div class="section" id="step2">
-  <h2>Our Song 🎵</h2>
-  <!-- Add songs here -->
-  <audio controls>
-    <source src="song1.mp3" type="audio/mpeg">
-  </audio>
-  <br>
-  <audio controls>
-    <source src="song2.mp3" type="audio/mpeg">
-  </audio>
-
-  <button onclick="showStep(3)">Next</button>
-</div>
-
-<!-- Step 3 -->
-<div class="section" id="step3">
-  <h2>This is Me…</h2>
-  <img src="me.jpg">
-  <p>Choosing you. Always.</p>
-
-  <button onclick="showStep(4)">Final Step</button>
-</div>
-
-<!-- Final Step -->
-<div class="section" id="step4">
-  <h1>Will You Be My Forever Valentine? 💖</h1>
-  <img src="finalpic.jpg">
-  <br>
+  <h2>Final Question 💖</h2>
+  <p>Will you be my forever Valentine?</p>
   <button onclick="yesLove()">Yes ❤️</button>
 </div>
 
 <script>
-
-/* Unlock */
-function enterSite(){
-  document.getElementById("unlock").style.display="none";
-}
-
-/* Show Steps */
-function showStep(step){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.getElementById("step"+step).classList.add("active");
-  randomCartoon();
-}
 
 /* Floating Hearts */
 setInterval(()=>{
@@ -200,22 +212,33 @@ setInterval(()=>{
   setTimeout(()=>heart.remove(),8000);
 },800);
 
-/* Cartoon Popups */
-function randomCartoon(){
-  const cartoon=document.createElement("img");
-  cartoon.src="cartoon.gif"; /* replace with your cartoon gif */
-  cartoon.classList.add("cartoon");
-  cartoon.style.left=Math.random()*80+"vw";
-  cartoon.style.top=Math.random()*80+"vh";
-  document.body.appendChild(cartoon);
-  setTimeout(()=>cartoon.remove(),5000);
+/* Unwrap */
+function unwrapHeart(){
+  const heart=document.querySelector(".gift-heart");
+  heart.classList.add("unwrapped");
+
+  setTimeout(()=>{
+    heart.classList.add("glow");
+  },800);
+
+  setTimeout(()=>{
+    document.getElementById("unlock").style.opacity="0";
+    document.getElementById("unlock").style.transition="1.5s";
+  },1500);
+
+  setTimeout(()=>{
+    document.getElementById("unlock").style.display="none";
+  },3000);
 }
 
-/* Final Yes */
+function showStep(step){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById("step"+step).classList.add("active");
+}
+
 function yesLove(){
   alert("You just made me the happiest person alive ❤️");
 }
-
 </script>
 
 </body>
