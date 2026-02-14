@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Journey ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  overflow-x:hidden;
+  text-align:center;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color:white;
+}
+
+/* Floating Hearts Background */
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:float 8s linear forwards;
+  z-index:-1;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-20vh);}
+}
+
+/* Unlock Screen */
+#unlock{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:#ff6b81;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+#unlock button{
+  padding:15px 30px;
+  border:none;
+  border-radius:40px;
+  font-size:18px;
+  background:white;
+  color:#ff4b6e;
+  cursor:pointer;
+}
+
+/* Banner */
+.hero{
+  width:100%;
+  max-width:1920px;
+  height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:rgba(0,0,0,0.2);
+  backdrop-filter:blur(5px);
+}
+
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* Sections */
+.section{
+  padding:100px 20px;
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+/* Images */
+.section img{
+  width:260px;
+  border-radius:25px;
+  margin:20px;
+}
+
+/* Buttons */
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:40px;
+  background:#ff4b6e;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+/* Cartoon popup */
+.cartoon{
+  position:fixed;
+  width:100px;
+  animation:pop 5s forwards;
+}
+@keyframes pop{
+  0%{transform:scale(0);}
+  20%{transform:scale(1);}
+  100%{opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Unlock Screen -->
+<div id="unlock">
+  <h1>This is only for Jojesha ❤️</h1>
+  <button onclick="enterSite()">Unlock My Heart 💖</button>
+</div>
+
+<!-- Banner -->
+<div class="hero">
+  <!-- Replace banner.jpg with your banner image -->
+  <img src="banner.jpg">
+  <h1>Happy Valentine’s Day Jojesha ❤️</h1>
+  <button onclick="showStep(1)">Begin Journey</button>
+</div>
+
+<!-- Step 1 -->
+<div class="section" id="step1">
+  <h2>Our Story Begins 💞</h2>
+  <p>The day we met changed everything.</p>
+
+  <!-- GIF space -->
+  <img src="yourgif.gif">
+
+  <button onclick="showStep(2)">Go Deeper</button>
+</div>
+
+<!-- Step 2 -->
+<div class="section" id="step2">
+  <h2>Our Song 🎵</h2>
+  <!-- Add songs here -->
+  <audio controls>
+    <source src="song1.mp3" type="audio/mpeg">
+  </audio>
+  <br>
+  <audio controls>
+    <source src="song2.mp3" type="audio/mpeg">
+  </audio>
+
+  <button onclick="showStep(3)">Next</button>
+</div>
+
+<!-- Step 3 -->
+<div class="section" id="step3">
+  <h2>This is Me…</h2>
+  <img src="me.jpg">
+  <p>Choosing you. Always.</p>
+
+  <button onclick="showStep(4)">Final Step</button>
+</div>
+
+<!-- Final Step -->
+<div class="section" id="step4">
+  <h1>Will You Be My Forever Valentine? 💖</h1>
+  <img src="finalpic.jpg">
+  <br>
+  <button onclick="yesLove()">Yes ❤️</button>
+</div>
+
+<script>
+
+/* Unlock */
+function enterSite(){
+  document.getElementById("unlock").style.display="none";
+}
+
+/* Show Steps */
+function showStep(step){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById("step"+step).classList.add("active");
+  randomCartoon();
+}
+
+/* Floating Hearts */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+},800);
+
+/* Cartoon Popups */
+function randomCartoon(){
+  const cartoon=document.createElement("img");
+  cartoon.src="cartoon.gif"; /* replace with your cartoon gif */
+  cartoon.classList.add("cartoon");
+  cartoon.style.left=Math.random()*80+"vw";
+  cartoon.style.top=Math.random()*80+"vh";
+  document.body.appendChild(cartoon);
+  setTimeout(()=>cartoon.remove(),5000);
+}
+
+/* Final Yes */
+function yesLove(){
+  alert("You just made me the happiest person alive ❤️");
+}
+
+</script>
+
+</body>
+</html>
